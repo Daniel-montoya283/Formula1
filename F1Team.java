@@ -6,32 +6,45 @@ public class F1Team {
     private String name;
     private String location;
     private String teamCaptain;
-    private ArrayList<String> sponsors;
+    private ArrayList<String> sponsors = new ArrayList<>();
     private int foundationYear;
-    private String podiums;
+    private int podiums;
     private int victories;
-
 
 
     private PitCrewTeam pitCrewTeam;
     private TeamA teamA;
     private TeamB teamB;
     private ArrayList<RacingCar> teamRacingCars;
-    private ArrayList<TeamMember> drivers;
-    
-    
-
+    private ArrayList<String> drivers;
     
 
-
-
-    //Constructor
-    public F1Team(String name, String location, int foundationYear){
+    //Constructor de la clase F1TEAM
+    public F1Team(String name, String location, int foundationYear, ArrayList<RacingCar> teamCars, PitCrewTeam pitCrewTeam){
         this.name = name;
         this.location = location;
         this.foundationYear = foundationYear;
-        this.teamA = new TeamA(this.teamRacingCars);
-        this.teamB = new TeamB(this);
+        this.pitCrewTeam = pitCrewTeam;
+        this.teamA = new TeamA(teamCars.get(0));
+        this.teamB = new TeamB(teamCars.get(1));
+    }
+
+    //Getter y Setter para 'TeamA'
+    public TeamA getTeamA(){
+        return this.teamA;
+    }
+
+    public void setTeamA(TeamA newTeamA){
+        this.teamA = newTeamA;
+    }
+
+    //Getter y Setter para 'TeamB'
+    public TeamB getTeamB(){
+        return this.teamB;
+    }
+
+    public void setTeamB(TeamB newTeamB){
+        this.teamB = newTeamB;
     }
 
     // Getter y Setter para 'name'
@@ -89,11 +102,11 @@ public class F1Team {
     }
 
     // Getter y Setter para 'drivers'
-    public ArrayList<TeamMember> getDrivers() {
+    public ArrayList<String> getDrivers() {
         return drivers;
     }
 
-    public void setDrivers(ArrayList<TeamMember> drivers) {
+    public void setDrivers(ArrayList<String> drivers) {
         this.drivers = drivers;
     }
 
@@ -107,11 +120,11 @@ public class F1Team {
     }
 
     // Getter y Setter para 'podiums'
-    public String getPodiums() {
+    public int getPodiums() {
         return podiums;
     }
 
-    public void setPodiums(String podiums) {
+    public void setPodiums(int podiums) {
         this.podiums = podiums;
     }
 

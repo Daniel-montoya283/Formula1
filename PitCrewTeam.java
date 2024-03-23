@@ -2,43 +2,82 @@ import java.util.ArrayList;
 
 public class PitCrewTeam {
     //todos los 20 integrantes 
-    //ArrayList<> o atributos de los miembros
-    private ArrayList<TeamMember> PitCrewTeamMembers = new ArrayList<>();
-    private TeamA teamA;
-    private TeamB teamB;
 
-    
-    public PitCrewTeam(Boolean bool){
+    //ArrayList<> / atributos de los miembros estático, así le pertenece a todas las instancias de la clase y a las clases hijas
+    protected static ArrayList<TeamMember> PitCrewTeamMembers = new ArrayList<>();
+
+    public PitCrewTeam(boolean bool){
         //creación de los miembros de los pits
 
         //TyreGunners
-        this.PitCrewTeamMembers.add(new TyreGunner("Carlos"));
-        this.PitCrewTeamMembers.add(new TyreGunner("Jose"));
-        this.PitCrewTeamMembers.add(new TyreGunner("Juan"));
-        this.PitCrewTeamMembers.add(new TyreGunner("Alan"));
+        PitCrewTeamMembers.add(new TyreGunner("Carlos"));
+        PitCrewTeamMembers.add(new TyreGunner("Jose"));
+        PitCrewTeamMembers.add(new TyreGunner("Juan"));
+        PitCrewTeamMembers.add(new TyreGunner("Alan"));
 
         //TyreOffs
-        this.PitCrewTeamMembers.add(new TyreOff("Sebas") );
-        this.PitCrewTeamMembers.add(new TyreOff("Dylan"));
-        this.PitCrewTeamMembers.add(new TyreOff("Daniel"));
-        this.PitCrewTeamMembers.add(new TyreOff("Nelson"));
+        PitCrewTeamMembers.add(new TyreOff("Sebas") );
+        PitCrewTeamMembers.add(new TyreOff("Dylan"));
+        PitCrewTeamMembers.add(new TyreOff("Daniel"));
+        PitCrewTeamMembers.add(new TyreOff("Nelson"));
 
         //TyreOns
-        this.PitCrewTeamMembers.add(new TyreOn("Lucas"));
-        this.PitCrewTeamMembers.add(new TyreOn("Adam"));
-        this.PitCrewTeamMembers.add(new TyreOn("Paul"));
-        this.PitCrewTeamMembers.add(new TyreOn("Pablo"));
+        PitCrewTeamMembers.add(new TyreOn("Lucas",true, "A"));
+        PitCrewTeamMembers.add(new TyreOn("Adam", true, "A"));
+        PitCrewTeamMembers.add(new TyreOn("Paul", true, "B"));
+        PitCrewTeamMembers.add(new TyreOn("Pablo", true, "B"));
 
         //FrontJacks
-        this.PitCrewTeamMembers.add(new FrontJack("Saul"));
-        this.PitCrewTeamMembers.add(new FrontJack("Sam"));
+        PitCrewTeamMembers.add(new FrontJack("Saul", true, "A"));
+        PitCrewTeamMembers.add(new FrontJack("Sam", true, "B"));
 
         //RearJacks
-        this.PitCrewTeamMembers.add(new RearJack("Philip"));
-        this.PitCrewTeamMembers.add(new RearJack("Jhon"));
+        PitCrewTeamMembers.add(new RearJack("Philip", true, "A"));
+        PitCrewTeamMembers.add(new RearJack("Jhon", true, "B"));
 
-        System.out.println("se han creado los miembros");
+        //SideJacks
+        PitCrewTeamMembers.add(new SideJack("Diego"));
+        PitCrewTeamMembers.add(new SideJack("Mateo"));
+
+        //FrontWings
+        PitCrewTeamMembers.add(new FrontWingAdjust("Jose", true, "A"));
+        PitCrewTeamMembers.add(new FrontWingAdjust("Evan", true, "B"));
+
+        //Lollipop
+        PitCrewTeamMembers.add(new LollipopMan("Nate"));
+
+        System.out.println("All members have joined the team!");
     }
 
-    public PitCrewTeam(){}
+    public PitCrewTeam(){} //Sobrecarga de métodos
+
+
+
+    public void printPitCrewMembers(){
+
+        System.out.println("");
+        System.out.println("Pit crew members:");
+
+        for(int i = 0; i < PitCrewTeamMembers.size(); i++){
+
+            System.out.print(PitCrewTeamMembers.get(i).getName() + ": " + PitCrewTeamMembers.get(i).getClass().getName());
+
+            if(PitCrewTeamMembers.get(i).getExclusive() == true){
+                System.out.print( " -> Team: " + PitCrewTeamMembers.get(i).getTeam());
+            }
+
+            System.out.println("");
+        }
+
+    }
+
+    public void teamOverhaul(){
+        for(int i = 0; i < PitCrewTeamMembers.size(); i++){
+            PitCrewTeamMembers.get(i).setWorking(false);
+        }
+    }
+
+    public static ArrayList<TeamMember> getPitCrewTeamMembers() {
+        return PitCrewTeamMembers;
+    }
 }
